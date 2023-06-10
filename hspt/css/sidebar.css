@@ -1,0 +1,129 @@
+/* CSS: sidebar */
+
+/* sidebar */
+#sidebarColumn {  
+    height: 100%;
+    z-index: 0;
+    /*border-right: #efefef 1px solid;*/
+    
+    /* DEBUG */
+    /*border: red 1px dashed;*/
+}
+
+.sidebarWrapper {
+    margin-bottom: 10px;
+    
+    /* DEBUG */
+    /*border: blue 1px dashed;*/
+}
+
+#sysButtonBar {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+}
+
+/* logo */
+#logoBlock {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+#logoImg {
+    display: block;
+    height: auto;
+    width: 100px;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    
+    /* DEBUG */
+    /*border: green 1px dashed;*/
+ }
+
+/* navBar */
+.navBarBlock {
+    list-style-type: none;
+    padding: 0px;
+
+    /* DEBUG */
+    /*border: purple 1px dashed;*/
+}
+
+.navBarBlock > a {
+    display: block;
+    text-decoration: none;
+    
+    /* DEBUG */
+    /*border: green 1px dashed;*/
+}
+
+/* navButton */
+.navButton > li {
+    height: 40px;
+    line-height: 40px;
+    color: rgba(0,0,0,0.4);
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 0px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    
+    /* DEBUG */
+    /*border: greenyellow 1px dashed;*/
+}
+
+.navButton > li:hover {
+    /*box-shadow: -4px 0px 10px rgba(0,0,0,0.1);*/
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+.navButton > li:active {
+    background: #f2f2f2;
+    /*box-shadow: 0px 0px 5px rgba(0,0,0,0.1) inset;*/
+    -webkit-transition-duration: 0s; /* Safari */
+    transition-duration: 0s;
+}
+
+.navButton.focus > li  {
+	color: #ffffff;
+    box-shadow: 0px 0px 20px rgba(55,215,140,0.2);
+    background-color: rgba(55,215,140,1);
+}
+
+.navButton.disable > li  {
+	color: rgba(0,0,0,0.2);
+    background-color: transparent;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+/* sysButton */
+.sysButton {
+    line-height: 40px;
+	height: 40px;
+    text-align: center;
+    
+    /* DEBUG */
+    /*border: greenyellow 1px dashed;*/
+}
+
+.sysButton > a {
+    padding: 5px;
+    color: rgba(55,215,140,1);
+    font-size: 12px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    
+    /* DEBUG */
+    /*border: green 1px dashed;*/
+}
+
+.sysButton > a:active {
+	background-color: #f2f2f2;
+}
+

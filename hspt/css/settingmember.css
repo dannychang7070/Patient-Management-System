@@ -1,0 +1,74 @@
+/* CSS: lightBox */
+
+/* lightBox */
+#lightBoxColumn {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    height: 100%;
+    overflow: hidden;
+    background: rgba(0,0,0,0.6);
+    z-index: 1000;
+    
+
+/*    border: red 1px dashed;*/
+}
+
+#lightBoxWrapper {
+    height: 100%;
+  
+/*    border: blue 1px dashed;*/
+}
+
+/* memberBoxBlock */
+#memberBoxBlock {
+    float: left;
+    position: relative;
+    height: 45%;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,1);
+    z-index: 1100;
+
+   
+    /* DEBUG */
+/*    border: green 1px dashed;*/
+}
+
+/*memberBoxTitle*/
+#memberBoxTitle{
+    font-weight: bold;
+    font-size: 30px;
+}
+
+
+.col-form-label{
+    font-size: 24px;
+}
+/* closeButton */
+#closeButtonBlock {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    top: 10px;
+    right: 10px;
+    text-align: center;
+    vertical-align: middle;
+    z-index: 1090;
+    
+    /* DEBUG */
+/*    border: purple 1px dashed;*/
+}
+
+@media only screen and (max-width: 1000px){
+    #memberBoxBlock {
+        height: 60%;
+        width: 80%;
+        top: 50%;
+        left: 10%;
+/*        border: red 1px dashed;*/
+    }
+}

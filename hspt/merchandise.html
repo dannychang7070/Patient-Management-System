@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<!-- This is 1.0 Patient List Page -->
+<html lang="en">
+    <head>
+        <title>學善物理治療團隊管理系統</title>
+        <!-- Required meta tags always come first -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <link rel="icon" href="img/logo2.png" sizes="16x16">
+        
+        <!-- CSS: External -->
+        <!-- Bootstrap 3.3.7 CSS --><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <!-- Font Awesome 4.7.0 CSS--><link rel="stylesheet" href="ext/font-awesome-4.7.0/css/font-awesome.min.css">
+        
+        <!-- CSS: Internal -->
+        <!-- general --><link rel="stylesheet" href="css/general.css">
+        <!-- sidebar --><link rel="stylesheet" href="css/sidebar.css">
+        <!-- index --><link rel="stylesheet" href="css/index.css">
+        <!-- merchandise - lightBox --><link rel="stylesheet" href="css/merchandise.css">
+
+        <!-- JS: External -->
+        <!-- jQuery 3.2.1 --><script src="https://code.jquery.com/jquery-3.2.1.js"   integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="   crossorigin="anonymous"></script>
+        <!-- Bootstrap 3.3.7 JS -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <!-- Tether JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        
+        <!-- JS: Internal -->
+        <!-- sidebar --><script type="text/javascript" src="js/sidebar.js"></script>
+        <!-- searchbar --><script type="text/javascript" src="js/search-merchandise-bar.js"></script>
+        <!-- treatment --> <script type="text/javascript" src="js/merchandise.js"></script>
+        <script src="js/jquery.tabledit.merchandise.js"></script>
+
+        <!-- Srollspy JS -->
+        <script type="text/javascript">
+            $('body').scrollspy({ target: '#myNavbar' });
+        </script>
+        <script>
+            // Read GET data from a URL using JavaScript        
+            function getUrlVars() {
+                var vars = {};
+                var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+                vars[key] = value;
+                });
+                return vars;
+            }
+            var token;
+            token = getCookie("token");
+
+            function getCookie(cname) {
+              var name = cname + "=";
+              var decodedCookie = decodeURIComponent(document.cookie);
+              var ca = decodedCookie.split(';');
+              for(var i = 0; i <ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                  c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                  return c.substring(name.length, c.length);
+                }
+              }
+              return "";
+            }
+            // 全域變數               
+            var page_account = getUrlVars()['account'];            
+            var page_isOnlyWarning = getUrlVars()['isOnlyWarning'];
+            if(!getUrlVars()['name']){
+
+            }else{
+                var page_name = getUrlVars()['name'];
+                page_name = decodeURI(page_name, "UTF-8");
+            }
+
+            if(!getUrlVars()['size']){
+
+            }else{
+                var page_size = getUrlVars()['size'];
+                page_size = decodeURI(page_size, "UTF-8");
+            }            
+
+            // page_size = decodeURI(page_size, "UTF-8");
+            //alert(page_size);
+            function viewData(){
+                $.post({
+                    url: 'api/getMerchandise.php',
+                    data: JSON.stringify({
+                        // User
+                        // account: "admin",
+                        token: token,
+                        isOnlyWarning: page_isOnlyWarning, 
+                        name: page_name,
+                        size: page_size
+                    }),      
+                    success: function (jsonData) { // Callback function when successful
+                        viewMerchandiseData(jsonData); // Call VIEW function 
+                    },
+                    fail: function () {
+                        alert("ERROR: Database connection failed.");
+                    },
+                    contentType: "application/json;charset=UTF-8",                  
+                }).done(function(data){
+                    tableData();
+                })    
+            }
+        </script>               
+    </head>
+    
+    <body data-spy="scroll" data-target="#myNavbar" data-offset="50" onload="viewData()">
+        <!-- bodyContainer -->
+        <div id="bodyContainer" pageID="4" class="container-fluid">
+            <!-- bodyRow -->
+            <div id="bodyRow" class="row">
+                <!-- sidebarColumn -->
+                <div id="sidebarColumn" class="col-md-2 col-sm-3">
+                    <!-- logo -->
+                    <div id="logoBlock" class="row sidebarWrapper">
+                        <a id="logoButton" href="index.html">
+                            <img id="logoImg" class="img-responsive text-center center-block" src="img/logo.jpg">
+                        </a>
+                    </div>
+                    <!-- mainNavBar -->
+                    <div id="mainNavBar" class="row sidebarWrapper">
+                        <nav>
+                            <ul class="navBarBlock">
+                                <a id="examNav" class="navButton" href="index.html">
+                                    <li>診療與病歷</li>
+                                </a>
+                                <a id="treatmentsNav" class="navButton" href="treatment.html">
+                                    <li>治療項目</li>
+                                </a>
+                                <a id="merchandisesNav" class="navButton" href="merchandise.html">
+                                    <li>商品</li>
+                                </a>
+                                <a id="reportsNav" class="navButton" href="report.html">
+                                    <li>報表</li>
+                                </a>
+                            </ul>
+                        </nav>
+                    </div>
+                    <!--sysButtonBar-->
+                    <div id="sysButtonBar" class="row sidebarWrapper">
+                        <nav>
+                            <ul class="navBarBlock">
+                                <li id="settingsNav" class="sysButton">
+                                    <a href="setting-member.html">系統設定</a>
+                                </li>
+                                <li id="logoutNav" class="sysButton">
+                                    <a href="login.html" onclick='return check()'>登出</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>            
+                <!-- contentColumn -->
+                <div id="contentColumn" class="col-md-10 col-sm-9">
+                    <!-- topPart -->
+                    <div id="topPart" class="row">
+                        <div id="searchbarBlock" class="col-md-10 col-sm-9">
+                            <span id="searchIcon" class="searchbarWrapper">
+                                <button id="searchIconImg"></button>
+                            </span>
+                            <span id="searchbar" class="searchbarWrapper search-merchandise-bar">
+                                <input id="searchbarInput" type="text" placeholder="搜尋商品">
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- contentPart -->
+                    <div id="contentPart" class="col-md-12 col-sm-12">
+                        <br/><br/>
+                        <div class="" style="">
+                            <button type="button" class="btn btn-md btn-info showAll">
+                                <span class="glyphicon glyphicon-refresh"> 顯示全部</span>
+                            </button>   
+                            <button type="button" class="tabledit-add-button btn btn-md btn-primary pull-right canEdit">
+                                <span class="glyphicon glyphicon-plus">Add</span>
+                            </button>
+                        </div>
+                        <div class="" style="margin-top:20px">
+                            <table id="tabledit" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>ID</th>
+                                        <th>名稱</th>
+                                        <th>規格</th>
+                                        <th>分部</th>
+                                        <th>剩餘量</th>
+                                        <th>庫存警告量</th>
+                                        <th>定價</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tablebody"></tbody>
+                            </table>
+                        </div>                        
+                    </div>
+                </div> 
+                <!--LIGHTBOX CODES HERE, should be template-->
+                <!--lightBox-->
+                <div id="lightBoxColumn" class="col-md-12 col-sm-12" >
+                    <div id="lightBoxWrapper" class="row">
+                        <div id="merchandiseBoxBlock" class="col-md-10 col-md-push-1">
+
+                            <span id="merchandiseBoxTitle">新增商品</span>
+
+                            <div class="form-group row" style="padding-top:24px;">
+                                <label class="col-md-4 col-form-label">商品名稱<span style="color:red">*</span></label>
+                                <div class="col-md-5">
+                                 <input id="new_name" class="form-control new_merhcandise_name_form" type="text" placeholder="例如: 按摩藥膏">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">商品規格<span style="color:red">*</span></label>
+                                <div class="col-md-5">
+                                 <input id="new_size" class="form-control new_merchandise_size_form" type="text" placeholder="例如: S/M/L">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">分部<span style="color:red">*</span></label>
+                                <select id="departmentlist" class="col-md-5" style="height: 30px; margin-left: 13.5px;">
+                                    <option value="0" >選擇分部</option>
+                                </select>
+                            </div>        
+
+                            <div class="form-group row">
+                              <label class="col-md-4 col-form-label">庫存警告量<span style="color:red">*</span></label>
+                              <div class="col-md-5">
+                                <input id="warning" class="form-control" type="number">
+                              </div>
+                            </div>   
+
+                            <div class="form-group row">
+                              <label class="col-md-4 col-form-label">商品定價<span style="color:red">*</span></label>
+                              <div class="col-md-5">
+                                <input id="new_price" class="form-control" type="number">
+                              </div>
+                            </div>   
+                            <button id="add_newMerchandise" type="submit" class="btn btn-primary pull-right">確定</button>                
+                        </div>
+                        <div id="closeButtonBlock">
+                            <button id="lightBoxCloseButton">X</button> <!-- lightBoxCloseButton -->
+                        </div>
+                    </div>
+                </div> 
+                <!--LIGHTBOX CODES HERE, should be template-->
+                <!--lightBox-->
+                <div id="inventoryBoxColumn" class="col-md-12 col-sm-12" >
+                    <div id="inventoryBoxWrapper" class="row">
+                        <div id="inventoryBoxBlock" class="col-md-10 col-md-push-1">
+
+                            <span id="inventoryBoxTitle"></span>
+                            <div class="" style="margin-top:20px">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>入庫時間</th>
+                                            <th>庫存異動類型</th>
+                                            <th>入庫數量</th>
+                                            <th>總成本(元)</th>
+                                            <th>入庫人</th>
+                                            <th>每件成本(元)</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <div id="caseTime" class="caseTime">
+                                                    <select id="selectYear"></select>
+                                                    <b>-</b>
+                                                    <select id="selectMonth"></select>
+                                                    <b>-</b>
+                                                    <select id="selectDay"></select>
+                                                    <br/>
+                                                    <select id="selectHour"></select>
+                                                    <b>:</b>
+                                                    <select id="selectMinute"></select>    
+<!--                                                     <b>:</b>
+                                                    <select id="selectSecond"></select>  -->
+                                              </div>
+                                            </th>
+                                            <th>
+                                                <select id="newInventoryStatus" class="form-control">
+                                                    <option value="1" selected>進貨</option>
+                                                    <option value="2" disabled>盤點</option>
+                                                </select>
+                                            </th>
+                                            <th><input id="newInventoryAmount" class="form-control" type="number"></th>
+                                            <th><input id="newTotalCost" class="form-control" type="number"></th>
+                                            <th><input id="newUserAccount" class="form-control" type="text" disabled></th>
+                                            <th><input id="newUnitPrice" class="form-control" type="number" disabled></th>
+                                            <th><button id="addNewInventory" type="submit">新增</button></th>
+                                        </tr>                                        
+                                    </thead>
+                                    <tbody id="inventory_list"></tbody>
+                                </table>
+                            </div>                 
+                        </div>
+                        <div id="inventoryCloseButtonBlock">
+                            <button id="inventoryBoxCloseButton">X</button> <!-- lightBoxCloseButton -->
+                        </div>
+                    </div>
+                </div>                 
+            </div>
+        </div>
+    </body>
+</html>

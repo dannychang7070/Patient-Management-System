@@ -1,0 +1,63 @@
+/* CSS: treatment-sidebar */
+
+/* navBar */
+#maintreatmentnavBar .treatmentnavBarBlock {
+    padding: 0px;
+    text-align: center;
+    /* DEBUG */
+    /*border: red 1px dashed;*/
+}
+
+
+.treatmentnavBarBlock a li{
+    display: inline-block;
+    padding-right: 10px;
+    padding-left:  10px;
+
+    /* DEBUG */
+    /*border: red 1px dashed;*/
+}
+
+
+/* treatmentnavBarButton */
+.treatmentnavBarButton > li {
+    height: 40px;
+    line-height: 40px;
+    color: rgba(0,0,0,0.4);
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 0px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    
+    /* DEBUG */
+    /*border: greenyellow 1px dashed;*/
+}
+
+.treatmentnavBarButton > li:hover {
+    /*box-shadow: -4px 0px 10px rgba(0,0,0,0.1);*/
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+.treatmentnavBarButton > li:active {
+    background: #f2f2f2;
+    /*box-shadow: 0px 0px 5px rgba(0,0,0,0.1) inset;*/
+    -webkit-transition-duration: 0s; /* Safari */
+    transition-duration: 0s;
+}
+
+.treatmentnavBarButton.focus > li  {
+	color: #ffffff;
+    box-shadow: 0px 0px 20px rgba(55,215,140,0.2);
+    background-color: rgba(55,215,140,1);
+}
+
+.treatmentnavBarButton.disable > li  {
+	color: rgba(0,0,0,0.2);
+    background-color: transparent;
+    box-shadow: none;
+    cursor: not-allowed;
+}

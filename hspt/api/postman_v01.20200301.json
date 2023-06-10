@@ -1,0 +1,1353 @@
+{
+	"info": {
+		"_postman_id": "bcdec0d2-56f1-918d-4149-39c3ece6f20c",
+		"name": "hspt API",
+		"description": "狀態說明\n1.[POST] 已實作，測試OK\n2.[PUT] 已實作，測試有問題\n3.[GET] 未實作",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "login 0.0起始－登入",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\t\"account\":\"admin\", \n\t\"password\":\"hspt\"\n}"
+				},
+				"url": {
+					"raw": "{{serverIP}}/login.php",
+					"host": [
+						"{{serverIP}}"
+					],
+					"path": [
+						"login.php"
+					]
+				},
+				"description": "登入"
+			},
+			"response": []
+		},
+		{
+			"name": "getCaseDepartment 1.0病患－取得分店病患",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"token\": \"12345\",\n    \"searchWord\": \"\"\n}"
+				},
+				"url": {
+					"raw": "{{serverIP}}/getCaseDepartment.php",
+					"host": [
+						"{{serverIP}}"
+					],
+					"path": [
+						"getCaseDepartment.php"
+					]
+				},
+				"description": "API=1.0 取得分店病患\n\n取得分部病患資料\n\n1.傳入參數：使用者帳號、搜尋類別、搜尋關鍵字\n\n2.新增回傳參數，ID(分部病患ID)、caseID(分部自定義病歷號碼)"
+			},
+			"response": []
+		},
+		{
+			"name": "getInsertCaseData 1.0病患－新增病歷所需資料",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"token\": \"12345\",\n    \"departmentID\": 1,\n    \"department_patientID\": 3\n}"
+				},
+				"url": {
+					"raw": "localhost/hspt/api/getInsertCaseData.php",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"hspt",
+						"api",
+						"getInsertCaseData.php"
+					]
+				},
+				"description": "API=1.0 取得新增病歷所需資料"
+			},
+			"response": []
+		},
+		{
+			"name": "getLastCaseHistory 1.0病患－取得上次病歷",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"token\":\"12345\",\"departmentID\":1,\"therapistAccount\":\"admin\",\"department_patientID\":3}"
+				},
+				"url": {
+					"raw": "{{serverIP}}/getLastCaseHistory.php",
+					"host": [
+						"{{serverIP}}"
+					],
+					"path": [
+						"getLastCaseHistory.php"
+					]
+				},
+				"description": "API=1.0 在新增病歷時，取得上次病歷"
+			},
+			"response": []
+		},
+		{
+			"name": "getAllCaseDate 1.0病患－取得病患就醫日期",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"token\": \"12345\",\n    \"departmentID\": 1,\n    \"department_patientID\": 3\n}"
+				},
+				"url": {
+					"raw": "{{serverIP}}/getAllCaseDate.php",
+					"host": [
+						"{{serverIP}}"
+					],
+					"path": [
+						"getAllCaseDate.php"
+					]
+				},
+				"description": "API=1.2 取得病患歷史就醫日期\n\n1.msg權限不足，代表該帳號無法讀取該病歷內容"
+			},
+			"response": [
+				{
+					"name": "管理者",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{serverIP}}/getAllCaseDate.php",
+							"host": [
+								"{{serverIP}}"
+							],
+							"path": [
+								"getAllCaseDate.php"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+							"name": "Cache-Control",
+							"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Length",
+							"value": "412",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 17 Jun 2017 05:08:19 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Expires",
+							"value": "Thu, 19 Nov 1981 08:52:00 GMT",
+							"name": "Expires",
+							"description": "Gives the date/time after which the response is considered stale"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100",
+							"name": "Keep-Alive",
+							"description": "Custom header"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache",
+							"name": "Pragma",
+							"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.23 (Unix) PHP/5.3.29 mod_wsgi/3.5 Python/3.5.2 OpenSSL/1.0.1p",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/5.3.29",
+							"name": "X-Powered-By",
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+						}
+					],
+					"cookie": [],
+					"body": "{\"code\":1,\"msg\":\"\",\"data\":{\"patientsData\":{\"name\":\"\\u6e2c\\u8a66\\u75c5\\u60a3\",\"birthday\":\"2016-10-01\",\"gender\":\"\\u7537\",\"phone1\":\"0800000123\",\"phone2\":\"\"},\"case\":[{\"date\":\"2017-04-05 23:10:00\",\"caseHistory_ID\":\"13\",\"msg\":\"\"},{\"date\":\"2017-04-05 23:07:00\",\"caseHistory_ID\":\"12\",\"msg\":\"\"},{\"date\":\"2017-04-05 22:20:00\",\"caseHistory_ID\":\"11\",\"msg\":\"\"},{\"date\":\"2016-10-02 00:00:00\",\"caseHistory_ID\":\"1\",\"msg\":\"\"}]}} "
+				},
+				{
+					"name": "分部1治療師1",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{serverIP}}/getAllCaseDate.php",
+							"host": [
+								"{{serverIP}}"
+							],
+							"path": [
+								"getAllCaseDate.php"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "getCaseByDate 1.0病患－取得病患某日就醫",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"token\": \"12345\",\n    \"date\": \"2018-06-09 00:00:00\",\n    \"caseHistory_ID\": 68,\n    \"departmentID\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost/hspt/api/getCaseByDate.php",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"hspt",
+						"api",
+						"getCaseByDate.php"
+					]
+				},
+				"description": "API=1.2 取得病患某日就醫紀錄\n\n1.[待處理] 因為資料庫欄位調整，目前caseTreatment回傳資料為空"
+			},
+			"response": [
+				{
+					"name": "管理者",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{serverIP}}/getCaseByDate.php",
+							"host": [
+								"{{serverIP}}"
+							],
+							"path": [
+								"getCaseByDate.php"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+							"name": "Cache-Control",
+							"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Length",
+							"value": "747",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 08 Jul 2017 06:32:27 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Expires",
+							"value": "Thu, 19 Nov 1981 08:52:00 GMT",
+							"name": "Expires",
+							"description": "Gives the date/time after which the response is considered stale"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100",
+							"name": "Keep-Alive",
+							"description": "Custom header"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache",
+							"name": "Pragma",
+							"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.23 (Unix) PHP/5.3.29 mod_wsgi/3.5 Python/3.5.2 OpenSSL/1.0.1p",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/5.3.29",
+							"name": "X-Powered-By",
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+						}
+					],
+					"cookie": [],
+					"body": "{\"code\":1,\"msg\":\"\",\"data\":{\"canEdit\":true,\"caseHistory_ID\":\"13\",\"caseTreatment\":[{\"ID\":\"9\",\"diseaseID\":\"1\",\"part\":\"\",\"diseaseName\":\"\",\"treatmentID\":\"1\",\"treatmentName\":\"\",\"treatmentType\":\"\",\"price\":\"100\",\"charge\":\"99\"},{\"ID\":\"15\",\"diseaseID\":\"1\",\"part\":\"\\u624b\",\"diseaseName\":\"\\u7600\\u9752\",\"treatmentID\":\"1\",\"treatmentName\":\"\\u6309\\u6469\",\"treatmentType\":\"\\u5f92\\u624b\\u6cbb\\u7642\",\"price\":\"100\",\"charge\":\"99\"},{\"ID\":\"16\",\"diseaseID\":\"1\",\"part\":\"\\u624b\",\"diseaseName\":\"\\u7600\\u9752\",\"treatmentID\":\"1\",\"treatmentName\":\"\\u6309\\u6469\",\"treatmentType\":\"\\u5f92\\u624b\\u6cbb\\u7642\",\"price\":\"100\",\"charge\":\"99\"}],\"caseMerchandise\":[{\"ID\":\"2\",\"merchandiseID\":\"1\",\"name\":\"\\u6309\\u6469\\u85e5\\u818f\",\"size\":\"5ml\",\"amount\":\"1\",\"price\":\"100\",\"charge\":\"99\"}]}} "
+				}
+			]
+		},
+		{
+			"name": "updatePatient 1.0病患－更新病患資料",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"token\":\"12345\", \n\t\"data\":{\n\t\t\"oldpatientsData\": {\n\t\t\t\"name\":\"1\",\n\t\t\t\"birthday\":\"1\",\n\t\t\t\"gender\":\"男\",\n\t\t\t\"phone1\":\"0983696959\",\n\t\t\t\"phone2\":\"076171786\",\n\t\t\t\"address\":\"122\",\n\t\t\t\"note\":\"沒有病患備註\"\n\t\t},\n\t\t\"newpatientsData\":{\n\t\t\t\"name\":\"1\",\n\t\t\t\"birthday\":\"1\",\n\t\t\t\"gender\":\"男\",\n\t\t\t\"phone1\":\"0983696959\",\n\t\t\t\"phone2\":\"076171786\",\n\t\t\t\"address\":\"122\",\n\t\t\t\"note\":\"沒有病患備註\"\n\t\t}\n\t}\n}"
+				},
+				"url": {
+					"raw": "{{serverIP}}/updatePatient.php",
+					"host": [
+						"{{serverIP}}"
+					],
+					"path": [
+						"updatePatient.php"
+					]
+				},
+				"description": "API=1.0 更新病患資料\n\n1.更新病患資料，需傳入修改前的資料\n\n2.傳入舊資料與修改後的資料，避免資料竄改，如果舊資料與資料庫資料不符時，不更新\n\n3.所有分店共用相同的病患資料\n\n\n－－－－－－－－－－－－－－－－－－－－\n\n２／２３\n已修改為token模式，未測試"
+			},
+			"response": []
+		},
+		{
+			"name": "insertCaseHistory 1.0病患－新增病歷",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"token\": \"123456\",\n  \"departmentID\": 1,\n  \"therapistAccount\": \"doctor11\",\n  \"department_patientID\": 1,\n  \"dateString\": \"2020-03-01 23:53\",\n  \"note\":\"病歷備註寫在這\",\n  \"caseTreatment\": [\n    {\n      \"diseaseID\": 1,\n      \"packetageID\" :1,\n      \"price\": 100,\n      \"charge\": 99,\n      \"treatment\": [\n        {\n          \"ID\": 1\n        }\n      ]\n    }\n  ],\n  \"caseMerchandise\": [\n    {\n      \"merchandiseID\": 1,\n      \"amount\": 1,\n      \"price\": 100,\n      \"charge\": 99\n    }\n  ]\n}"
+				},
+				"url": {
+					"raw": "{{serverIP}}/insertCaseHistory.php",
+					"host": [
+						"{{serverIP}}"
+					],
+					"path": [
+						"insertCaseHistory.php"
+					]
+				},
+				"description": "API=1.0 新增病歷"
+			},
+			"response": []
+		},
+		{
+			"name": "insertCaseDepartment 1.0病患－新增病患",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"token\": \"123456\",\n    \"departmentID\": 1,\n    \"name\": \"chen\",\n    \"birthday\": \"1991-04-21\",\n    \"pid\": \"A100000001\",\n    \"gender\": \"男\",\n    \"phone\": \"\",\n    \"tel\": \"076171786\",\n    \"address\": \"高雄市梓官區中崙路\",\n    \"note\": \"測試人員\"\n}"
+				},
+				"url": {
+					"raw": "{{serverIP}}/insertCaseDepartment.php",
+					"host": [
+						"{{serverIP}}"
+					],
+					"path": [
+						"insertCaseDepartment.php"
+					]
+				},
+				"description": "API=1.0 新增病患"
+			},
+			"response": []
+		},
+		{
+			"name": "deleteCaseHistory 1.0病患－刪除病歷",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"token\": \"12345\",\n    \"caseID\": 68\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{serverIP}}/deleteCaseHistory.php",
+					"host": [
+						"{{serverIP}}"
+					],
+					"path": [
+						"deleteCaseHistory.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getDisease 3.0治療－取得症狀",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"token\":\"81aa4df67f32b113c77b17fb576faa80\"}\n"
+				},
+				"url": {
+					"raw": "{{serverIP}}/getDisease.php",
+					"host": [
+						"{{serverIP}}"
+					],
+					"path": [
+						"getDisease.php"
+					]
+				},
+				"description": "API=3.0 症狀分頁，取得症狀"
+			},
+			"response": []
+		},
+		{
+			"name": "getTreatmentType 3.0治療－取得治療類型",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"token\":\"81aa4df67f32b113c77b17fb576faa80\"}"
+				},
+				"url": {
+					"raw": "{{serverIP}}/getTreatmentType.php",
+					"host": [
+						"{{serverIP}}"
+					],
+					"path": [
+						"getTreatmentType.php"
+					]
+				},
+				"description": "API=3.0 治療類型分頁，取得治療類型\n\n1.管理者可以查全區，departmentID為選填\n\n2.非管理者departmentID為必填"
+			},
+			"response": []
+		},
+		{
+			"name": "getTreatment 3.0治療－取得治療方法",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"token\":\"81aa4df67f32b113c77b17fb576faa80\"}"
+				},
+				"url": {
+					"raw": "{{serverIP}}/getTreatment.php",
+					"host": [
+						"{{serverIP}}"
+					],
+					"path": [
+						"getTreatment.php"
+					]
+				},
+				"description": "API=3.0 治療分頁，取得治療方法"
+			},
+			"response": []
+		},
+		{
+			"name": "getDiseasePrice 3.0治療－取得價格資料",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b185b974-78cf-486e-af55-771214f594c6",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"token\":\"81aa4df67f32b113c77b17fb576faa80\"}"
+				},
+				"url": {
+					"raw": "{{serverIP}}/getDiseasePrice.php",
+					"host": [
+						"{{serverIP}}"
+					],
+					"path": [
+						"getDiseasePrice.php"
+					]
+				},
+				"description": "API=3.0 價格綁定分頁，取得價格資料\n\n管理者權限查詢\n{\"token\":\"123456\"}\n\n一般權限查詢\n查詢特定症狀(disease)\n{\"token\":\"3333\",\"departmentID\":1,\"diseaseID\":3}\n\n查詢特定treatmentType\n{\"token\":\"3333\",\"departmentID\":1,\"treatmentTypeID\":1}\n\n查詢特定症狀(disease)＋特定treatmentType\n{\"token\":\"3333\",\"departmentID\":1,\"diseaseID\":3,\"treatmentTypeID\":1}"
+			},
+			"response": []
+		},
+		{
+			"name": "updateDisease 3.0治療－編輯症狀",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\t\n\t\"token\":\"81aa4df67f32b113c77b17fb576faa80\",\n\t\"diseaseID\": \"5\",\n    \"part\": \"腰椎2\",\n    \"name\": \"椎間盤突出2\",\n    \"old_part\": \"腰椎\",\n    \"old_name\": \"椎間盤突出\"\n}"
+				},
+				"url": {
+					"raw": "{{serverIP}}/updateDisease.php",
+					"host": [
+						"{{serverIP}}"
+					],
+					"path": [
+						"updateDisease.php"
+					]
+				},
+				"description": "API=3.0 症狀分頁，新增、編輯症狀"
+			},
+			"response": []
+		},
+		{
+			"name": "updateTreatmentType 3.0治療－編輯治療類型",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"token\":\"81aa4df67f32b113c77b17fb576faa80\",\n\t\"treatmentTypeID\": \"1\",\n    \"name\": \"徒手治療1\",\n    \"old_name\": \"徒手治療\"\n}"
+				},
+				"url": {
+					"raw": "{{serverIP}}/updateTreatmentType.php",
+					"host": [
+						"{{serverIP}}"
+					],
+					"path": [
+						"updateTreatmentType.php"
+					]
+				},
+				"description": "API=3.0 治療類型分頁，新增、編輯治療類型"
+			},
+			"response": []
+		},
+		{
+			"name": "updateTreatment 3.0治療－編輯治療",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"token\":\"81aa4df67f32b113c77b17fb576faa80\",\n\t\"treatmentID\": \"12\",\n    \"name\": \"1234\",\n    \"treatmentTypeID\": \"1\",\n    \"old_name\": \"123\",\n    \"old_treatmentTypeID\": \"1\"\n}"
+				},
+				"url": {
+					"raw": "{{serverIP}}/updateTreatment.php",
+					"host": [
+						"{{serverIP}}"
+					],
+					"path": [
+						"updateTreatment.php"
+					]
+				},
+				"description": "API=3.0 治療分頁，新增、編輯治療"
+			},
+			"response": []
+		},
+		{
+			"name": "updateDiseasePrice 3.0治療－編輯價格資料",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"token\":\"81aa4df67f32b113c77b17fb576faa80\",\n\t\"priceID\": \"4\",\n    \"diseaseID\": \"3\",\n    \"departmentID\": \"1\",\n    \"treatmentTypeID\": \"1\",\n    \"price\": \"101\",\n    \"old_diseaseID\": \"3\",\n    \"old_departmentID\": \"1\",\n    \"old_treatmentTypeID\": \"1\",\n    \"old_price\": \"100\"\n}"
+				},
+				"url": {
+					"raw": "{{serverIP}}/updateDiseasePrice.php",
+					"host": [
+						"{{serverIP}}"
+					],
+					"path": [
+						"updateDiseasePrice.php"
+					]
+				},
+				"description": "API=3.0 價格綁定分頁，新增、編輯價格綁定"
+			},
+			"response": []
+		},
+		{
+			"name": "deleteDisease 3.0治療－刪除症狀",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"token\":\"81aa4df67f32b113c77b17fb576faa80\",\"diseaseID\":3}"
+				},
+				"url": {
+					"raw": "{{serverIP}}/deleteDisease.php",
+					"host": [
+						"{{serverIP}}"
+					],
+					"path": [
+						"deleteDisease.php"
+					]
+				},
+				"description": "API=3.0 症狀分頁，刪除症狀"
+			},
+			"response": []
+		},
+		{
+			"name": "deleteTreatment 3.0治療－刪除治療",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"token\":\"81aa4df67f32b113c77b17fb576faa80\",\"treatmentID\":2}"
+				},
+				"url": {
+					"raw": "{{serverIP}}/deleteTreatment.php",
+					"host": [
+						"{{serverIP}}"
+					],
+					"path": [
+						"deleteTreatment.php"
+					]
+				},
+				"description": "API=3.0 治療分頁，刪除治療"
+			},
+			"response": []
+		},
+		{
+			"name": "deleteTreatmentType 3.0治療－刪除治療類型",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"token\":\"81aa4df67f32b113c77b17fb576faa80\",\"treatmentTypeID\":2}"
+				},
+				"url": {
+					"raw": "{{serverIP}}/deleteTreatmentType.php",
+					"host": [
+						"{{serverIP}}"
+					],
+					"path": [
+						"deleteTreatmentType.php"
+					]
+				},
+				"description": "API=3.0 治療類型分頁，刪除治療類型"
+			},
+			"response": []
+		},
+		{
+			"name": "deleteDiseasePrice 3.0治療－刪除價格綁定",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"token\":\"81aa4df67f32b113c77b17fb576faa80\",\"priceID\":3}"
+				},
+				"url": {
+					"raw": "{{serverIP}}/deleteDiseasePrice.php",
+					"host": [
+						"{{serverIP}}"
+					],
+					"path": [
+						"deleteDiseasePrice.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getInventory 4.0商品－取得庫存資料",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b185b974-78cf-486e-af55-771214f594c6",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"token\":\"e5c9bb0c2b63c57b3d020a29ab11b683\",\n\t\"merchandiseID\":6\n}"
+				},
+				"url": {
+					"raw": "{{serverIP}}/getInventory.php",
+					"host": [
+						"{{serverIP}}"
+					],
+					"path": [
+						"getInventory.php"
+					]
+				},
+				"description": "API=4.1 商品分頁，取得庫存資料\n\n1.userAdmin可以查全區商品庫存資料\n\n2.userLocal無權限可查\n\n3.一般使用者無權限可查"
+			},
+			"response": []
+		},
+		{
+			"name": "getMerchandise 4.0商品－取得商品",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b185b974-78cf-486e-af55-771214f594c6",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"token\":\"12345678\"}"
+				},
+				"url": {
+					"raw": "{{serverIP}}/getMerchandise.php",
+					"host": [
+						"{{serverIP}}"
+					],
+					"path": [
+						"getMerchandise.php"
+					]
+				},
+				"description": "API=4.0 商品分頁，取得商品"
+			},
+			"response": []
+		},
+		{
+			"name": "updateMerchandise 4.0商品－新增商品",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"醫療口罩\",\n    \"size\": \"成人\",\n    \"departmentID\": 1,\n    \"warning\": 20,\n    \"price\": 5,\n    \"token\": \"123456\",\n    \"merchandiseID\": 0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{serverIP}}/updateMerchandise.php",
+					"host": [
+						"{{serverIP}}"
+					],
+					"path": [
+						"updateMerchandise.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateMerchandise 4.0商品－編輯商品",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"醫療口罩\",\n    \"old_name\":\"醫療口罩\",\n    \"size\": \"幼童\",\n    \"old_size\":\"成人\",\n    \"departmentID\": 1,\n    \"old_departmentID\":1,\n    \"warning\": 20,\n    \"old_warning\":20,\n    \"price\": 5,\n    \"old_price\":5,\n    \"token\": \"123456\",\n    \"merchandiseID\": 9\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{serverIP}}/updateMerchandise.php",
+					"host": [
+						"{{serverIP}}"
+					],
+					"path": [
+						"updateMerchandise.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "insertInventory 4.0商品－新增存貨",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"token\": \"123456\",\n    \"merchandiseID\": 9,\n    \"time\": \"2020/02/28 12:30\",\n    \"type\": 1,\n    \"amount\": 200,\n    \"cost\": 600\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{serverIP}}/insertInventory.php",
+					"host": [
+						"{{serverIP}}"
+					],
+					"path": [
+						"insertInventory.php"
+					]
+				},
+				"description": "type 1 = 入庫"
+			},
+			"response": []
+		},
+		{
+			"name": "deleteMerchandise 4.0商品－刪除商品",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"token\":\"e5c9bb0c2b63c57b3d020a29ab11b683\",\n\t\"merchandiseID\":3\n}"
+				},
+				"url": {
+					"raw": "{{serverIP}}/deleteMerchandise.php",
+					"host": [
+						"{{serverIP}}"
+					],
+					"path": [
+						"deleteMerchandise.php"
+					]
+				},
+				"description": "API=4.0 商品分頁，刪除商品"
+			},
+			"response": []
+		},
+		{
+			"name": "deleteInventory 4.0商品－刪除庫存",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"token\":\"e5c9bb0c2b63c57b3d020a29ab11b683\",\n\t\"inventoryID\":3\n}"
+				},
+				"url": {
+					"raw": "{{serverIP}}/deleteInventory.php",
+					"host": [
+						"{{serverIP}}"
+					],
+					"path": [
+						"deleteInventory.php"
+					]
+				},
+				"description": "API=4.0 商品分頁，刪除庫存資料"
+			},
+			"response": []
+		},
+		{
+			"name": "report_daily 5.0報表－日報",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"token\":\"81aa4df67f32b113c77b17fb576faa80\",\"date\":\"2018-06-09\",\"departmentID\":1}"
+				},
+				"url": {
+					"raw": "{{serverIP}}/report_daily.php",
+					"host": [
+						"{{serverIP}}"
+					],
+					"path": [
+						"report_daily.php"
+					]
+				},
+				"description": "API=5.0 報表：日報"
+			},
+			"response": []
+		},
+		{
+			"name": "report_month 5.0報表－月報",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"token\":\"81aa4df67f32b113c77b17fb576faa80\",\"from\":\"2018-05-01\",\"to\":\"2019-06-30\",\"departmentID\":1}"
+				},
+				"url": {
+					"raw": "{{serverIP}}/report_month.php",
+					"host": [
+						"{{serverIP}}"
+					],
+					"path": [
+						"report_month.php"
+					]
+				},
+				"description": "API=5.0 報表：月報"
+			},
+			"response": []
+		},
+		{
+			"name": "report_merchandise 5.0報表－商品報表",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"token\":\"3333\",\"from\":\"2018-05-01\",\"to\":\"2019-06-30\",\"departmentID\":1}"
+				},
+				"url": {
+					"raw": "{{serverIP}}/report_merchandise.php",
+					"host": [
+						"{{serverIP}}"
+					],
+					"path": [
+						"report_merchandise.php"
+					]
+				},
+				"description": "API=5.0 報表：商品報表"
+			},
+			"response": []
+		},
+		{
+			"name": "getPermission 6.0設定－取得權限",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"token\":\"123456\"}"
+				},
+				"url": {
+					"raw": "{{serverIP}}/getPermission.php",
+					"host": [
+						"{{serverIP}}"
+					],
+					"path": [
+						"getPermission.php"
+					]
+				},
+				"description": "API=6.0 取得權限 getPermission.php"
+			},
+			"response": []
+		},
+		{
+			"name": "getUserList 6.0設定－取得用戶清單",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"token\":\"123456\"}"
+				},
+				"url": {
+					"raw": "{{serverIP}}/getUserList.php",
+					"host": [
+						"{{serverIP}}"
+					],
+					"path": [
+						"getUserList.php"
+					]
+				},
+				"description": "API=6.0 取得用戶清單"
+			},
+			"response": []
+		},
+		{
+			"name": "updatePermission 6.0設定－新增、更新角色權限表",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"token\":\"12345\",\"permission\":[{\"ID\":7,\"name\":\"會計人員\",\"p01\":1,\"p02\":0,\"p03\":1,\"p04\":1,\"p05\":1,\"p06\":1,\"p07\":1,\"p08\":1,\"p09\":1,\"p10\":1,\"p11\":1,\"p12\":1,\"p13\":1,\"p14\":1,\"p15\":1,\"p16\":1,\"p17\":1,\"p18\":1,\"p19\":1,\"p20\":1,\"p21\":1,\"p22\":1}]}"
+				},
+				"url": {
+					"raw": "{{serverIP}}/updatePermission.php",
+					"host": [
+						"{{serverIP}}"
+					],
+					"path": [
+						"updatePermission.php"
+					]
+				},
+				"description": "API=6.0 更新權限\n\n1.新增時，傳入單筆權限\n\n2.編輯時，傳入多筆有修改的權限，也可傳入所有的權限(系統會自動忽略沒修改的資料)"
+			},
+			"response": []
+		},
+		{
+			"name": "updateUser 6.0設定－新增、更新使用者",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"token\":\"12345\",\"ID\":1,\"userName\":\"管理者01\",\"userAccount\":\"admin\",\"departmentID\":1,\"permissionID\":1}"
+				},
+				"url": {
+					"raw": "{{serverIP}}/updateUser.php",
+					"host": [
+						"{{serverIP}}"
+					],
+					"path": [
+						"updateUser.php"
+					]
+				},
+				"description": "API=6.0 新增或編輯用戶"
+			},
+			"response": []
+		},
+		{
+			"name": "updateUser 6.0設定－刪除使用者",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"token\":\"12345\",\"ID\":2,\"status\":\"0\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{serverIP}}/updateUser.php",
+					"host": [
+						"{{serverIP}}"
+					],
+					"path": [
+						"updateUser.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "resetPassword 6.0設定－使用者修改密碼",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"token\":\"12345\",\"ID\":1,\"oldPassword\":\"hspt\",\"newPassword\":\"hspt1\"}"
+				},
+				"url": {
+					"raw": "{{serverIP}}/resetPassword.php",
+					"host": [
+						"{{serverIP}}"
+					],
+					"path": [
+						"resetPassword.php"
+					]
+				},
+				"description": "API=6.0 重設密碼"
+			},
+			"response": []
+		},
+		{
+			"name": "resetPassword 6.0設定－管理者重設密碼",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"token\":\"12345\",\"ID\":1}"
+				},
+				"url": {
+					"raw": "{{serverIP}}/resetPassword.php",
+					"host": [
+						"{{serverIP}}"
+					],
+					"path": [
+						"resetPassword.php"
+					]
+				},
+				"description": "API=6.0 重設密碼"
+			},
+			"response": []
+		}
+	]
+}

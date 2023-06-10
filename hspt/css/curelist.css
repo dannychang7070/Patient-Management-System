@@ -1,0 +1,18 @@
+#curelist_title{
+	text-align: center;
+}
+
+.scrolling-wrapper-flexbox {
+	display: flex;
+	flex-wrap: nowrap;
+	overflow-x: auto;
+}
+.newformContent {
+    flex: 0 0 auto;
+    margin-right: 3px;
+}
+
+.newmerchContent {
+    flex: 0 0 auto;
+    margin-right: 3px;
+}

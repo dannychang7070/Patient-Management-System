@@ -1,0 +1,375 @@
+/* CSS: lightBox */
+
+/* lightBox */
+#lightBoxColumn {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    height: 100%;
+    overflow: hidden;
+    background: rgba(0,0,0,0.6);
+    z-index: 1000;
+    
+    /* DEBUG */
+    /*border: red 1px dashed;*/
+}
+
+#lightBoxWrapper {
+    height: 100%;
+    
+    /* DEBUG */
+    /*border: blue 1px dashed;*/
+}
+
+/* lightBox */
+#lightPatientBoxColumn {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    height: 100%;
+    overflow: hidden;
+    background: rgba(0,0,0,0.6);
+    z-index: 1000;
+    
+
+/*    border: red 1px dashed;*/
+}
+
+#lightPatientBoxWrapper {
+    height: 100%;
+  
+/*    border: blue 1px dashed;*/
+}
+
+/* diseaseBoxBlock */
+#addPatientBoxBlock {
+    float: left;
+    position: relative;
+    /* height: 55%;*/
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,1);
+    z-index: 1100;
+
+   
+    /* DEBUG */
+/*    border: green 1px dashed;*/
+}
+
+/*diseaseBoxTitle*/
+#addPatientBoxTitle{
+    font-weight: bold;
+    font-size: 30px;
+    text-align: center;
+}
+
+
+.col-form-label{
+    font-size: 24px;
+}
+
+#departmentlist{
+    height: 30px; 
+    margin-left: 13.5px; 
+    width: 72%;
+}
+
+#add_Patient_Row{
+    background-color: #337ab7;
+    text-align: center;
+    margin-bottom: 0px;
+}
+
+#add_newPatient{
+    font-weight: bold;
+    font-size: 24px;
+    border-color: transparent;
+}
+
+/* patientBox */
+#patientBoxBlock {
+    float: left;
+    position: relative;
+    height: 90%;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,1);
+    z-index: 1100;
+    
+    /* DEBUG */
+    /*border: green 1px dashed;*/
+}
+
+
+/*patientBoxTitle*/
+#patientBoxTitlePart {
+    position: relative;
+    height: 15%;
+    z-index: 1010;
+    
+    /* DEBUG */
+    /*border: purple 1px dashed;*/
+}
+
+.patientBoxTitlePartDiv {
+    display: inline;
+    
+    /* DEBUG */
+    /*border: orange 1px dashed;*/
+}
+
+
+#patientBoxTitleBlock {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 100%;
+    text-align: center;
+}
+
+#editPatientInfoButtonBlock {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/*patientBoxContent*/
+#patientBoxContentPart {
+    height: 85%;
+    box-shadow: 0px -8px 15px rgba(0,0,0,0.1);
+    
+    /* DEBUG */
+    /*border: purple 1px dashed;*/
+}
+
+.patientBoxContentPartDiv {
+    position: relative;
+    /* DEBUG */
+    /*border: orange 1px dashed;*/
+}
+
+#patientBoxContentLine1 {
+    height: 6%;
+}
+
+.patientBoxContentLine1Div {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.patientBoxContentLine1Div {
+    display: inline;
+    position: absolute;
+    
+    /* DEBUG */
+    /*border: greenyellow 1px dashed;*/
+}
+
+
+#patientBoxDateBlock {
+    text-align: center;
+    width: 100%;
+}
+
+#editPatientHistoryButtonBlock {
+    right: 20px;
+}
+
+#patientBoxExamBlock {
+    height: 54%; 
+}
+
+#patientBoxExamSect {
+    height: 90%;
+    overflow-x: scroll;
+    white-space: nowrap;
+}
+
+
+/* examItem */
+.examItem {
+    display: inline-block;
+    position: relative;
+    margin: 10px;
+    width: 510px;
+    height: 300px;
+    background: rgba(0,0,0,0.1);
+    border-radius: 8px;
+    
+    /*border: cyan 1px dashed;*/
+}
+
+.examItemRemoveButton {
+    width: 100%;
+    height: 30px;
+}
+
+.examItemTitleBlock {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    vertical-align: middle;
+    
+    /*border: brown 1px dashed;*/
+}
+
+.examItemTitleBody {
+    display: inline-block;
+    width: 120px;
+    height: 40px;
+    margin: 0px 10px;
+    padding: 0px 5px;
+    border: rgba(0,0,0,0.2) 2px solid;
+    border-radius: 5px;
+    
+    /*border: yellow 1px dashed;*/
+}
+
+.examItemTitleDisease {
+    display: inline-block;
+    width: 350px;
+    height: 40px;
+    margin: 0px 5px;
+    padding: 0px 5px;
+    border: rgba(0,0,0,0.2) 2px solid;
+    border-radius: 5px;
+    
+    /*border: yellow 1px dashed;*/
+}
+
+.examItemTreatment {
+    display: block;
+    width: 490px;
+    height: 150px;
+    margin: 10px;
+    padding: 5px;
+    border: rgba(0,0,0,0.2) 2px solid;
+    border-radius: 5px;
+}
+
+.examItemPriceBlock {
+    position: absolute;
+    display: block;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: right;
+}
+
+.examItemPrice {
+    display: inline-block;
+    width: 120px;
+    height: 40px;
+    margin: 10px 0px 10px 10px;
+    padding: 5px;
+    border: rgba(0,0,0,0.2) 2px solid;
+    border-radius: 5px;
+}
+
+/* patientBoxGood */
+#patientBoxGoodBlock {
+    height: 35%;
+    
+    /*border: yellow 1px dashed;*/
+}
+
+#patientBoxGoodSect {
+    height: 90%;
+    overflow-x: scroll;
+    white-space: nowrap;
+}
+
+.goodItem {
+    display: inline-block;
+    position: relative;
+    margin: 10px;
+    width: 510px;
+    height: 80px;
+    background: rgba(0,0,0,0.1);
+    border-radius: 8px;
+    
+    /*border: cyan 1px dashed;*/
+}
+
+.goodItemName {
+    display: inline-block;
+    position: relative;
+    width: 120px;
+    height: 40px;
+    margin: 0px 10px;
+    padding: 0px 5px;
+    border: rgba(0,0,0,0.2) 2px solid;
+    border-radius: 5px;
+    
+    /*border: yellow 1px dashed;*/
+}
+
+.goodItemSize {
+    display: inline-block;
+    width: 120px;
+    height: 40px;
+    margin: 0px 10px;
+    padding: 0px 5px;
+    border: rgba(0,0,0,0.2) 2px solid;
+    border-radius: 5px;
+}
+
+.goodItemQuantityInput {
+    display: inline-block;
+    width: 80px;
+    height: 40px;
+    margin: 0px 10px;
+    padding: 0px 5px;
+    border: rgba(0,0,0,0.2) 2px solid;
+    border-radius: 5px;
+}
+
+.goodItemPriceInput {
+    display: inline-block;
+    width: 80px;
+    height: 40px;
+    margin: 0px 10px;
+    padding: 0px 5px;
+    border: rgba(0,0,0,0.2) 2px solid;
+    border-radius: 5px;
+}
+
+/* patientBoxPrice */
+#patientBoxPriceBlock {
+    position: absolute;
+    bottom: 0px;
+    height: 5%;
+    width: 100%;
+    text-align: center;
+    
+    /*border: orange 1px dashed;*/
+}
+
+#patientBoxPriceBlock > div {
+    display: inline;
+    position: relative;
+
+    
+    /*border: greenyellow 1px dashed;*/
+}
+
+/* closeButton */
+#closeButtonBlock {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    top: 10px;
+    right: 10px;
+    text-align: center;
+    vertical-align: middle;
+    z-index: 1090;
+    
+    /* DEBUG */
+    /*border: green 1px dashed;*/
+}

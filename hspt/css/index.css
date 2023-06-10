@@ -1,0 +1,298 @@
+/* CSS: index */
+
+/* topPart */
+#searchbarBlock {
+    line-height: inherit;
+    height: 40px;
+    vertical-align: middle;
+    
+    /* DEBUG */
+    /*border: green 1px dashed;*/
+}
+
+
+#searchIcon {
+    display: inline-block;
+    position: absolute;
+    left: 20px;
+    width: 20px;
+    height: 40px;
+    
+    /* DEBUG */
+    /*border: purple 1px dashed;*/
+}
+
+#searchIconImg {
+    background: url('../img/searchIcon.png');
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    border-style: none;
+}
+
+#searchbar {
+    display: inline-block;
+    position: absolute;
+    left: 45px;
+    width: 90%;
+    height: 40px;
+
+    /* DEBUG */
+    /*border: purple 1px dashed;*/
+}
+
+#searchbarInput {
+    width: 100%;
+    height: 40px;
+    border: none;
+    background: none;
+    color: rgba(0,0,0,0.4);
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    font-size: 14px;
+    
+    /* DEBUG */
+    /*border: orange 1px dashed;*/
+}
+
+#searchbarInput:focus {
+	outline: none;
+    color: rgba(0,0,0,0.8);
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+
+
+
+/* contentPart */
+#backgroundimage{
+    max-height: 100%;  
+    max-width: 100%; 
+    width: auto;
+    height: auto;
+    position: absolute;  
+    top: 0;  
+    bottom: 0;  
+    left: 0;  
+    right: 0;  
+    margin: auto; 
+    z-index: -1;   
+}
+
+/* hospitalSect */
+.hospitalSect {
+    display: block;
+    position: relative;
+    left: 0px;
+    padding: 20px 15px 0px 0px;
+    
+    /* DEBUG */
+    /*border: purple 1px dashed;*/
+}
+
+.hospitalNameBlock {
+    margin-bottom: 5px;
+    
+    /* DEBUG */
+    /*border: orange 1px dashed;*/
+}
+
+.hospitalName {
+    margin: 0px 0px 0px 20px;
+    color: rgba(0,0,0,0.8);
+    font-size: 24px;
+    font-weight: bold;
+    
+    /* DEBUG */
+    /*border: greenyellow 1px dashed;*/
+}
+
+.hospitalSectContent {
+    margin: 0px 15px;
+    width: 100%;
+    
+    /* DEBUG */
+    /*border: greenyellow 1px dashed;*/
+}
+
+/* patientItem */
+.patientItemBlock {
+    display: inline-block;
+    height: 100px;
+    
+    /* DEBUG */
+    /*border: grey 1px dashed;*/
+}
+
+.patientItem {
+    float: left;
+    position: relative;
+    margin: 15px 5px;
+    border-radius: 8px;
+    width: 160px;
+    height: 70px;
+    border: rgba(0,0,0,0.1) 1px solid;
+    -webkit-transition-duration: 0.2s; /* Safari */
+    transition-duration: 0.2s;
+    /* DEBUG */
+    /*border: orange 1px dashed;*/
+}
+
+.patientItem:hover {
+    height: 100px;
+    margin: 0px 5px;
+    transform: translateY(0px);
+    
+    border: rgba(0,0,0,0) 1px solid;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.1);
+    -webkit-transition-duration: 0.2s; *//* Safari */
+    transition-duration: 0.2s;
+}
+
+.patientItem:active {
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.1) inset;
+    -webkit-transition-duration: 0s; /* Safari */
+    transition-duration: 0s;
+}
+
+.patientItem a {
+    text-decoration: none;
+}
+
+.patientContent {
+    float: left;
+    padding: 5px;
+    border-radius: 8px;
+    width: 100%;
+    height: 70px;
+    
+    /* DEBUG */
+    /*border: cyan 1px dashed;*/
+}
+
+.caseID{
+    float: left;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    text-align: center;
+    color: rgba(55,215,140,1);
+    font-size: 14px;
+    font-weight: bold;
+    
+    /* DEBUG */
+    /*border: yellow 1px dashed;*/
+}
+
+.patientInfoBlock {
+    float: left;
+    position: relative;
+    margin-left: 5px;
+    max-width: 100px;
+    height: 60px;
+    /*overflow: scroll;*/
+    
+    /* DEBUG */
+    /*border: brown 1px dashed;*/
+}
+
+.patientName {
+    position: relative;
+    line-height: 20px;
+    color: rgba(0,0,0,0.8);
+    font-size: 12px;
+    font-weight: bold;
+    
+    /* DEBUG */
+    /*border: yellow 1px dashed;*/
+}
+
+.patientPhone1, .patientPhone2 {
+    line-height: 15px;
+    color: rgba(0,0,0,0.4);
+    font-size: 10px;
+    font-weight: lighter;
+    
+    /* DEBUG */
+    /*border: yellow 1px dashed;*/
+}
+
+
+/* detailButton */
+.detailButtonLink {    
+    float: left;
+    position: relative;
+    width: 100%;
+    line-height: 30px;
+    color: rgba(55,215,140,1);
+    font-size: 12px;
+    text-align: center;
+    z-index: 100px;
+    /* DEBUG */
+    /*border: yellow 1px dashed;*/
+}
+
+.detailButton {
+    border-top: rgba(0,0,0,0.1) 1px solid;
+    color: rgba(55,215,140,1);
+    font-weight: bold;
+    
+    /* DEBUG */
+    /*border: brown 1px dashed;*/
+}
+
+.detailButton:active {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    background: rgba(242,242,242,1);
+}
+
+/*blockNavBar*/
+
+#bookmarkNavBar {
+    position: absolute;
+    right: 0px;
+    padding: 0px;
+    height: 100%;
+    z-index: 90;
+    
+    /* DEBUG */
+    /*border: blue 1px dashed;*/
+}
+
+
+#bookmarkBlock {
+    position: absolute;
+    padding: 10px 20px 10px 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    list-style-type: none;
+    
+    
+    /* DEBUG */
+    /*border: green 1px dashed;*/
+}
+
+#bookmarkBlock li {
+    margin: 10px 0px;
+    padding: 0px;
+    height: 100%;
+    width: 100%;
+    border-right: rgba(0,0,0,0.4) 1px solid;
+    text-align: right;
+    
+    /* DEBUG */
+    /*border: orange 1px dashed;*/
+}
+
+#bookmarkBlock li a {
+    color: rgba(0,0,0,0.4);
+    font-size: 10px;
+    text-align: right;
+    text-decoration: none;
+}

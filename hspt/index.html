@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<!-- This is 1.0 Patient List Page -->
+<html lang="en">
+    <head>
+        <title>學善物理治療團隊管理系統</title>
+        <!-- Required meta tags always come first -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <link rel="icon" href="img/logo2.png" sizes="16x16">
+
+        <!-- CSS: External -->
+        <!-- Bootstrap 3.3.7 CSS --><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <!-- Font Awesome 4.7.0 CSS--><link rel="stylesheet" href="ext/font-awesome-4.7.0/css/font-awesome.min.css">
+        
+        <!-- CSS: Internal -->
+        <!-- general --><link rel="stylesheet" href="css/general.css">
+        <!-- sidebar --><link rel="stylesheet" href="css/sidebar.css">
+        <!-- index --><link rel="stylesheet" href="css/index.css">
+        <!-- lightBox --><link rel="stylesheet" href="css/lightBox.css">
+        
+        <!-- JS: External -->
+        <!-- jQuery 3.2.1 --><script src="https://code.jquery.com/jquery-3.2.1.js"   integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="   crossorigin="anonymous"></script>
+        <!-- Bootstrap 3.3.7 JS -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <!-- Tether JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        
+        <!-- JS: Internal -->
+        <!-- sidebar --><script type="text/javascript" src="js/sidebar.js"></script>
+        <!-- searchbar 目前不用了--><!--<script type="text/javascript" src="js/searchbar.js"></script>-->
+	    <!-- index --> <script type="text/javascript" src="js/index.js"></script>
+        <!-- patientBox --> <script type="text/javascript" src="js/patientBox.js"></script>
+        
+        <!-- Srollspy JS -->
+        <script type="text/javascript">
+            $('body').scrollspy({ target: '#myNavbar' });
+        </script>
+    </head>
+    
+    <body data-spy="scroll" data-target="#myNavbar" data-offset="50">
+        <!-- bodyContainer -->
+        <div id="bodyContainer" pageID="1" class="container-fluid">
+            <!-- bodyRow -->
+            <div id="bodyRow" class="row">
+                <!-- sidebarColumn -->
+                <div id="sidebarColumn" class="col-md-2 col-sm-3">
+                    <!-- logo -->
+                    <div id="logoBlock" class="row sidebarWrapper">
+                        <a id="logoButton" href="index.html">
+                            <img id="logoImg" class="img-responsive text-center center-block" src="img/logo.jpg">
+                        </a>
+                    </div>
+                    <!-- mainNavBar -->
+                    <div id="mainNavBar" class="row sidebarWrapper">
+                        <nav>
+                            <ul class="navBarBlock">
+                                <a id="examNav" class="navButton" href="index.html">
+                                    <li>診療與病歷</li>
+                                </a>
+                                <a id="treatmentsNav" class="navButton" href="treatment.html">
+                                    <li>治療項目</li>
+                                </a>
+                                <a id="merchandisesNav" class="navButton" href="merchandise.html">
+                                    <li>商品</li>
+                                </a>
+                                <a id="reportsNav" class="navButton" href="report.html">
+                                    <li>報表</li>
+                                </a>
+                            </ul>
+                        </nav>
+                    </div>
+                    <!--sysButtonBar-->
+                    <div id="sysButtonBar" class="row sidebarWrapper">
+                        <nav>
+                            <ul class="navBarBlock">
+                                <li id="settingsNav" class="sysButton">
+                                    <a href="setting-member.html">系統設定</a>
+                                </li>
+                                <li id="logoutNav" class="sysButton">
+                                    <a href="login.html" onclick='return check()'>登出</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>            
+                <!-- contentColumn -->
+                <div id="contentColumn" class="col-md-10 col-sm-9">
+                    <!-- topPart -->
+                    <div id="topPart" class="row">
+                        <div id="searchbarBlock" class="col-md-10 col-sm-9">
+                            <span id="searchIcon" class="searchbarWrapper">
+                                <button id="searchIconImg"></button>
+                            </span>
+                            <span id="searchbar" class="searchbarWrapper">
+                                <input id="searchbarInput" type="text" placeholder="請輸入姓名/生日/手機/市話/病歷號 來搜尋病患">
+                            </span>
+                        </div>
+                        <div id="newButtonBlock" class="col-md-2 col-sm-3 linkButton" style="margin-top: 2px">
+                           <button type="button" class="tabledit-add-button btn btn-md btn-primary pull-right canEdit">
+                                新增患者
+                            </button>                            
+                        </div>
+                    </div>
+
+                    <!-- contentPart -->
+                    <div id="contentPart" class="col-md-10 col-sm-9">
+                        <div id="wrapper" style="width:100%; text-align:center">
+                            <img id="backgroundimage" src="img/logo3.png" alt="logo" height="100" width="100"/>
+                        </div>
+                        <!-- TEMPLATE: hostpitalSect -->
+                        <template id="hospitalSectTemplate">
+                            <div class="row hospitalSect">
+                                <div class="hospitalNameBlock">
+                                    <div class="hospitalName"></div>
+                                </div>
+                                <div class="hospitalSectContent">
+                                    <!-- Autogenerated patientItem here -->
+                                </div>
+                            </div>
+                        </template>
+
+                        <!-- TEMPLATE: patientItem -->
+                        <template id="patientItemTemplate">
+                            <div class="patientItemBlock">
+                                <div class="patientItem">
+                                    <a href="" class="patientItemLink">
+                                        <div class="patientContent">
+                                            <div class="caseID"></div>
+                                            <div class="patientInfoBlock">
+                                                <div class="patientName"></div>
+                                                <div class="patientPhone1"></div>
+                                                <div class="patientPhone2"></div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="detailButtonLink">
+                                        <div class="detailButton">檢視詳細資訊</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                    
+                    <!-- boomarkNavBar -->
+                    <div id="bookmarkNavBar" class="col-md-2 col-sm-3">
+                        <nav>
+                            <ul id="bookmarkBlock">
+                                <!--Autogenerated bookmarks here-->
+                            </ul>
+                        </nav>
+                    </div>
+                    
+                    <!-- TEMPLATE: bookmark -->
+                    <template id="bookmarkTemplate">
+                        <li><a class="bookmarkLink"></a></li>
+                    </template> 
+                </div>
+                
+
+                <!--LIGHTBOX CODES HERE, should be template-->
+                <!--lightBox-->
+                <div id="lightBoxColumn" class="col-md-12 col-sm-12">
+                    <div id="lightBoxWrapper" class="row">
+                        <!--patientBox-->
+                        <div id="patientBoxBlock" class="col-md-10 col-md-push-1">
+                            
+                            <div id="patientBoxTitlePart" class="row">
+                                <div id="patientBoxTitleBlock" class="patientBoxTitlePartDiv">
+                                    <div id="patientBoxTitleBlockMajor">
+                                        <span id="patientBoxTitleCaseID"></span>
+                                        <span id="patientBoxTitleName"></span>
+                                        <input type="text" id="editPatientBoxTitleName" placeholder="姓名" hidden/>
+                                        <span id="patientBoxTitleAge"></span>
+                                    </div>
+                                    <div class="patientBoxTitleBlockDiv">
+                                        <div>
+                                            <span id="patientBoxTitleID"></span>
+                                            <span id="patientBoxTitleSex"></span>
+                                            <select id="editPatientBoxTitleSex" hidden>
+                                                <option id="patientBoxTitleSex1" value="男">男</option>
+                                                <option id="patientBoxTitleSex0" value="女">女</option>
+                                            </select>
+                                            
+                                            <span id="patientBoxTitleBirth"></span>
+                                            <select id="editPatientBoxTitleBirthYear" hidden></select>
+                                            <select id="editPatientBoxTitleBirthMonth" hidden></select>
+                                            <select id="editPatientBoxTitleBirthDay" hidden></select>
+                                            <label id="editPatientBoxTitleBirthLabel" hidden>生</label>
+                                            <span id="patientBoxTitleFirst"></span>
+                                        </div>
+                                        <div>
+                                            <span id="patientBoxTitlePhone1"></span>
+                                            <input type="text" id="editPatientBoxTitlePhone1" placeholder="家用電話" hidden/>
+                                            <span id="patientBoxTitlePhone2"></span>
+                                            <input type="text" id="editPatientBoxTitlePhone2" placeholder="行動電話" hidden/>
+                                            <span id="patientBoxTitleAddress"></span>
+                                            <input type="text" id="editPatientBoxTitleAddress" placeholder="地址" hidden/>
+                                            <span id="patientBoxTitleNote"></span>
+                                            <input type="text" id="editPatientBoxTitleNote" placeholder="備註" hidden/>                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="editPatientInfoButtonBlock" class="patientBoxTitlePartDiv linkButton">
+                                    <a href="#" id="editPatientInfoButtonLink">編輯基本資訊</a>
+                                    <a href="#" id="editPatientInfoOKButtonLink" hidden>完成</a>
+                                </div>
+                            </div>
+                            
+                            
+                            <div id="patientBoxContentPart" class="row">
+                                
+                                <div id="patientBoxContentLine1" class="patientBoxContentPartDiv">
+                                    <div id="patientBoxDateBlock" class="patientBoxContentLine1Div">
+                                        <select id="patientBoxDateSect">
+                                            <option selected disabled id="defaultDate">請選擇日期</option>
+                                            <!--AUTOGENERATED: dateOptionTeamplate-->
+                                        </select>
+                                    </div>
+                                    <div id="editPatientHistoryButtonBlock" class="patientBoxContentLine1Div linkButton">
+                                        <a href="#" id="editPatientHistoryButtonLink" hidden>編輯病歷與商品販賣紀錄</a>
+                                        <a href="#" id="deletePatientHistoryButtonLink" hidden>刪除紀錄</a>
+                                        <a href="#" id="editPatientHistoryOKButtonLink" hidden>完成</a>
+                                    </div>
+                                </div>
+                                <table id="patientTableBlock" class="table table-striped table-hover" style="display: none;">
+                                  <thead>
+                                    <tr>
+                                        <th scope="col">類別</th>
+                                        <th scope="col">項目</th>
+                                        <th scope="col">項目明細</th>
+                                        <th scope="col">數量</th>
+                                        <th scope="col">實收金額</th>                             
+                                    </tr>
+                                  </thead>
+                                  <tbody id="patientTable">
+                                  </tbody>
+                                </table>
+                                <div id="patientBoxExamBlock" class="patientBoxContentPartDiv" style="display: none;">
+                                    <div>
+                                        <span>診療內容</span>
+                                        <span id="patientBoxExamPrice"></span>
+                                        <button id="add_treatment" hidden>新增診療內容</button>
+                                    </div>
+                                    <div id="patientBoxExamSect">
+                                        <!--AUTOGENERATED: examItemTemplate-->
+                                    </div>
+                                </div>
+                                
+                                <div id="patientBoxGoodBlock" class="patientBoxContentPartDiv" style="display: none;">
+                                    <div>
+                                        <span>商品</span>
+                                        <span id="patientBoxGoodPrice">
+                                            <!-- AUTOCALCUTATE -->
+                                        </span>
+                                        <button id="add_merchandise" hidden>新增商品</button>
+                                    </div>
+                                    <div id="patientBoxGoodSect">
+                                        <!--AUTOGENERATED: goodItemTemplate-->
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                  <textarea class="form-control rounded-0" id="patientNoteTextArea" rows="3" placeholder="(本次病例備註)" style="display: none;"></textarea>
+                                </div>
+                                <div id="patientBoxFlexiblePrice" style="display: none; text-align: center;">
+                                    <form class="form-inline">
+                                        <div class="form-group" style="text-align: center;">
+                                            <span>實收</span>
+                                            <input class="total_number" type="number" disabled="true">
+                                            <span>元(應收</span>
+                                            <input class="should_number" type="number" disabled="true">
+                                            <span>元)</span>
+                                        </div>
+                                    </form>
+                                </div>                                    
+                                <div id="patientBoxPriceBlock">
+                                
+                                    <div id="patientBoxTotalPrice">
+                                        <!-- AUTOCALCULATE -->
+                                    </div> 
+                                    <div id="patientBoxOKButton"></div> <!-- show while edit mode -->
+                                    <div id="patientBoxCancelButton"></div> <!-- show while edit mode -->
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div id="closeButtonBlock">
+                            <button id="lightBoxCloseButton">X</button> <!-- lightBoxCloseButton -->
+                        </div>
+                    </div>
+                </div>
+
+                <!--LIGHTBOX CODES HERE, should be template-->
+                <!--lightBox-->
+                <div id="lightPatientBoxColumn" class="col-md-12 col-sm-12" >
+                    <div id="lightPatientBoxWrapper" class="row">
+                        <div id="addPatientBoxBlock" class="col-md-10 col-md-push-1">
+
+                            <div id="addPatientBoxTitle">新增患者</div>
+
+                            <div class="form-group row" style="padding-top:24px;">
+                                <label class="col-md-3 col-form-label">姓&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp名<span style="color:red">*</span></label>
+                                <div class="col-md-3">
+                                 <input id="add_Patient_Name" class="form-control new_patient_name_form" type="text" placeholder="王小明">
+                                </div>
+                                <label class="col-md-3 col-form-label">出生日期<span style="color:red">*</span></label>
+                                <div class="col-md-3">
+                                <select id="addPatientBoxTitleBirthYear"></select>
+                                <select id="addPatientBoxTitleBirthMonth"></select>
+                                <select id="addPatientBoxTitleBirthDay"></select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label">身分證號</label>
+                                <div class="col-md-3">
+                                 <input id="add_Patient_ID" class="form-control new_patient_pid_form" type="text" placeholder="E123456789">
+                                </div>
+                                <label class="col-md-3 col-form-label">性&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp別<span style="color:red">*</span></label>
+                                <div class="col-md-3">
+                                 <select id="add_Patient_Gender" class="col-md-12" style="height: 30px;">
+                                    <option value="1" >男</option>
+                                    <option value="2" >女</option>
+                                 </select>                                 
+                                </div>                            
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-md-3 col-form-label">手機號碼<span style="color:red">*</span></label>
+                              <div class="col-md-3">
+                                <input id="add_Patient_Cell" class="form-control" type="number" placeholder="0900-000-000">
+                              </div>
+                              <label class="col-md-3 col-form-label">市內電話</label>
+                              <div class="col-md-3">
+                                <input id="add_Patient_Phone" class="form-control" type="number" placeholder="06-260-8867">
+                              </div>                              
+                            </div> 
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label">住&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp址<span style="color:red">*</span></label>
+                                <div class="col-md-9">
+                                 <input id="add_Patient_Address" class="form-control new_patient_address_form" type="text" placeholder="台南市東區崇善路233號">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label">就醫分部<span style="color:red">*</span></label>
+                                <select id="departmentlist" class="col-md-9">
+                                    <option value="0" >選擇分部</option>
+                                </select>
+                            </div>        
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label">分部備註</label>
+                                <div class="col-md-9">
+                                 <input id="add_Patient_Note" class="form-control new_patient_note_form" type="text" placeholder="">
+                                </div>
+                            </div> 
+                            <div id="add_Patient_Row" class="form-group row">
+                                <button id="add_newPatient" type="submit" class="btn btn-primary">確認新增</button> 
+                            </div>               
+                        </div>
+                        <div id="closeButtonBlock">
+                            <button id="lightPatientBoxCloseButton">X</button> <!-- lightBoxCloseButton -->
+                        </div>
+                    </div>
+                </div> 
+
+                <!--TEMPLATE: dateOption-->
+                <template id="dateOptionTemplate">
+                    <option class="dateOption"></option> <!-- dateItem -->
+                </template>
+                
+                <template id="defaultDateOption">
+                    <option selected disabled>請選擇日期</option>
+                </template>
+                
+                <!--TEMPLATE: examItem-->
+                <template id="examItemTemplate">
+                    <div class="examItem newformContent">
+                        <button class="delete delete_treatment" style="float:right;" hidden>Delete</button><!--examItemRemoveButton-->
+                        <span class="examItemTitleBody"></span> <!-- examItemTitleBody -->
+                        <span class="examItemTitleDisease"></span> <!-- examItemTitleDisease -->
+                        <div class="examItemTreatment"></div> <!-- examItemTreatment -->                        
+                        <select id="partlist" class="editExamItemTitleBody partlist" hidden>
+                            <option value="-1" >請選擇</option>
+                        </select>
+                        <select id="diseaselist" class="editExamItemTitleDisease diseaselist" hidden>
+                            <option value="-1" >請選擇</option>
+                        </select>
+                        <div id="therapylist" class="editExamItemTreatment therapylist" hidden></div>
+                        <div id="moneylist" class="moneylist editExamItemPrice" hidden>
+                            <input type="number" class="money">             
+                            <label>元</label>
+                            <input type="hidden" class="exact_money">                            
+                        </div>
+                        <span class="examItemPrice"></span>
+                        <label class="examItemPriceLabel">元</label>
+                    </div>
+                </template>
+                
+                <!--TEMPLATE: goodItem-->
+                <template id="goodItemTemplate">
+                    <div class="goodItem newmerchContent">
+                        <button class="delete delete_good" style="float:right;" hidden>Delete</button>  
+                        <span class="goodItemName"></span> <!-- goodItemName -->
+                        <select id="merchandiseName" class="merchandiseName editGoodItemName" hidden>
+                            <option value="-1" >請選擇</option>
+                        </select>
+                        <span class="goodItemSize"></span> <!-- goodItemSize -->
+                        <select id="merchandiseSize" class="merchandiseSize editGoodItemSize" hidden>
+                            <option value="-1" >請選擇</option>
+                        </select>
+                        <span class="goodItemQuantityBlock">
+                            <span class="goodItemQuantityInput"></span> <!-- quantityItemInput -->
+                            <span class="goodItemPriceInput"></span> <!-- goodItemPrice --> 
+                        </span>
+                        <div id="merchandiseCash" class="merchandiseCash" hidden>
+                            <button class="goodItemMinusButton minus" hidden>減</button> <!-- - -->
+                            <input class="editGoodItemQuantityInput quantity" type="number" value="1" readonly hidden/>
+                            <button class="goodItemPlusButton add" hidden>加</button> <!-- + -->
+                            <input class="editGoodItemPriceInput total" type="number" hidden/>
+                            <label>元</label>
+                            <input type="hidden" class="exact_cash" value="">
+                            <label style="display: none;" class="inventory">剩餘 件</label>                              
+                         </div>       
+                    </div>
+                </template>
+                
+                <!-- TEMPLATE: partItem -->
+                <template id="partItemTemplate">
+                    <option value="" class="part"></option>
+                </template> 
+                <!-- TEMPLATE: diseaseItem -->
+                <template id="diseaseItemTemplate">
+                    <option value="" class="disease"></option>
+                </template>
+                <!-- TEMPLATE: merchandiseItem -->
+                <template id="merchandiseNameItem">
+                    <option value="" class="merchandiseNameItem"></option>
+                </template>
+                <!-- TEMPLATE: merchandiseSizeItem -->
+                <template id="merchandiseSizeItem">
+                    <option value="" class="merchandiseSizeItem"></option>
+                </template>                 
+                <!-- TEMPLATE: therapyItem -->
+                <template id="therapyItemTemplate">
+                    <div class="therapy_group">
+                        <div class="therapyNameBlock">
+                            <div class="therapy_name"></div>
+                        </div>
+                        <div class="therapySectContent">
+                            <!-- Autogenerated patientItem here -->
+                        </div>
+                    </div>          
+                </template>
+
+                <!-- TEMPLATE: treatmentItem -->
+                <template id="treatmentItemTemplate">
+                     <input type="checkbox" class="treatmentset" name="selector[]" disabled>
+                     <label class="treatmentwordset"></label>
+                </template>  
+
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,112 @@
+/* CSS: general settings for this website */
+
+
+/* body and container configurations */
+html, body {
+    height: 100%;   
+    width: 100%;
+    
+    /*font-family 從Google Fonts取用*/
+    /*字體大小四組*/
+    /*字體顏色四組*/
+}
+
+.container-fluid {
+    height: 100%;
+    
+    /* DEBUG */
+    /*border: black 1px dashed;*/
+}
+
+#bodyRow {
+    height: 100%;
+    text-decoration: none;
+    
+    /* DEBUG */
+    /*border: goldenrod 1px dashed;*/
+}
+
+/* contentColumn */
+#contentColumn {
+    height: 100%;
+    overflow: hidden;
+    box-shadow: 0px 0px 8px rgba(0,0,0,0.1);
+    z-index: 0;
+    /* DEBUG */
+    /*border: red 1px dashed;*/
+}
+
+#topPart {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 40px;
+    border-bottom: rgba(238,238,238,1) 1px solid;
+    z-index: 100;
+    
+    /* DEBUG */
+    /*border: blue 1px dashed;*/
+}
+
+#contentPart {
+    display: block;
+    position: absolute;
+    top: 40px;
+    left: 0px;
+    height: calc(100% - 40px);
+    overflow-x: hidden;
+    overflow-y: scroll;
+    z-index: 90;
+    
+    /* DEBUG */
+    /*border: blue 1px dashed;*/
+}
+
+
+
+
+
+
+
+
+/*.linkButton style*/
+.linkButton {
+    line-height: 40px;
+    height: 40px;
+    vertical-align: middle;
+    text-align: right;
+    
+    /* DEBUG */
+    /*border: green 1px dashed;*/
+}
+
+.linkButton > a {    
+    padding: 5px;
+    color: rgba(55,215,140,1);
+    font-size: 12px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.linkButton > a:active {
+	background-color: rgba(242,242,242,1);
+}
+
+/* Responsive Design */
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1200px) {
+    body {background-color: green;}
+}
+
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px) {
+    body {background-color: yellow;}
+}
+
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+    body {background-color: red;}
+}

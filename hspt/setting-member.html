@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<!-- This is 1.0 Patient List Page -->
+<html lang="en">
+    <head>
+        <title>學善物理治療團隊管理系統</title>
+        <!-- Required meta tags always come first -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <link rel="icon" href="img/logo2.png" sizes="16x16">
+
+        <!-- CSS: External -->
+        <!-- Bootstrap 3.3.7 CSS --><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <!-- Font Awesome 4.7.0 CSS--><link rel="stylesheet" href="ext/font-awesome-4.7.0/css/font-awesome.min.css">
+        
+        <!-- CSS: Internal -->
+        <!-- general --><link rel="stylesheet" href="css/general.css">
+        <!-- index --><link rel="stylesheet" href="css/index.css">
+        <!-- sidebar --><link rel="stylesheet" href="css/sidebar.css">
+        <!-- setting-sideBar --><link rel="stylesheet" href="css/setting-sideBar.css">
+        <!-- settingmember - lightBox --><link rel="stylesheet" href="css/settingmember.css">
+
+        <!-- JS: External -->
+        <!-- jQuery 3.2.1 --><script src="https://code.jquery.com/jquery-3.2.1.js"   integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="   crossorigin="anonymous"></script>
+        <!-- Bootstrap 3.3.7 JS -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <!-- Tether JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+
+        <!-- JS: Internal -->
+        <!-- sidebar --><script type="text/javascript" src="js/sidebar.js"></script>
+        <!-- setting-sideBar --><script type="text/javascript" src="js/setting-sideBar.js"></script>
+        <!-- settingmember --><script type="text/javascript" src="js/settingmember.js"></script>
+        <!-- searchbar --><script type="text/javascript" src="js/search-settingmember.js"></script>  
+             
+        <!-- Srollspy JS -->
+        <script type="text/javascript">
+            $('body').scrollspy({ target: '#myNavbar' });
+        </script>
+        <script>
+            var comboData;
+            var roleData;
+            var jsonDepartmentObj2 = {};
+            var jsonRoleObj = {};
+            var token;
+            token = getCookie("token");
+
+            function getCookie(cname) {
+              var name = cname + "=";
+              var decodedCookie = decodeURIComponent(document.cookie);
+              var ca = decodedCookie.split(';');
+              for(var i = 0; i <ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                  c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                  return c.substring(name.length, c.length);
+                }
+              }
+              return "";
+            }              
+            function viewData(){
+                $.post({
+                    url: 'api/getUserList.php',
+                    data: JSON.stringify({
+                        // User
+                        // account: "admin"     
+                        token: token  
+                    }),      
+                    success: function (jsonData) { // Callback function when successful
+                        viewUserData(jsonData); // Call VIEW function
+                        //console.log('viewData') ;
+                    },
+                    fail: function () {
+                        alert("ERROR: Database connection failed.");
+                    },
+                    contentType: "application/json;charset=UTF-8",                  
+                }).done(function(data){
+                    tableData();
+                    //canEdit();
+                })    
+            }
+            function showRoleOption(jsonData){
+                //console.log('showRole');
+                roleData = jsonData;
+                if (roleData.code == 2) {
+                    alert(roleData.msg);
+                    reLogin();
+                }else{
+                    if (roleData.code == 0) {
+                        var jLength = 0;      
+                    } else {
+                        var jLength = roleData.data.length;
+                    }               
+                    for(var j=1;j<jLength;j++){ 
+                        jsonRoleObj[roleData.data[j].ID] = roleData.data[j].name;                
+                    }
+                    viewData();
+                }
+            }
+            function showRoleList(){
+                $.post({
+                    url: "api/getPermission.php",
+                    data: JSON.stringify({
+                        // account: "admin"   
+                        token: token    
+                    }),                
+                    success: function (jsonData) {
+                        showRoleOption(jsonData); 
+                    },
+                    fail: function () {
+                        alert("ERROR at askDBData: Database connection failed.");
+                    },
+                    contentType: "application/json;charset=UTF-8",
+                }); 
+            }
+            function showDepartmentList(){
+                $.post({
+                    url: "api/comboDepartment.php",
+                    data: JSON.stringify({
+                        // account: "admin"   
+                        token: token    
+                    }),            
+                    success: function (jsonData) {
+                        showListOption(jsonData); 
+                    },
+                    fail: function () {
+                        alert("ERROR at askDBData: Database connection failed.");
+                    },
+                    contentType: "application/json;charset=UTF-8",
+                }); 
+            }
+            function showListOption(jsonData){
+                //console.log('showList');
+                comboData = jsonData;
+                if (comboData.code == 2) {
+                    alert(comboData.msg);
+                    reLogin();
+                }else{
+                    if (comboData.code == 0) {
+                        var jLength = 0;      
+                    } else {
+                        var jLength = comboData.data.department.length;
+                    }               
+                    for(var j=0;j<jLength;j++){ 
+                        jsonDepartmentObj2[comboData.data.department[j].ID] = comboData.data.department[j].name;
+                    }
+                    showRoleList();
+                }
+            }
+            function viewLoginMessage(dataIn) {
+                deleteData = dataIn;
+                if(deleteData.code==0){
+                    alert(deleteData.msg);
+                    window.location.href = "login.html";
+                }else{   
+                    alert("登入成功");
+                    document.cookie = "token=" + deleteData.data+ ";path=/";
+                    token = getCookie("token");
+                } 
+            }
+
+            function reLogin() {
+                var username = prompt("請輸入帳號", "username");
+                var password = prompt("請輸入密碼", "password");
+                $.ajax({
+                    async:false,
+                    url: "api/login.php",
+                    type:"POST",
+                    data: JSON.stringify({
+                        // User
+                        account: username,
+                        password: password       
+                    }),
+                    contentType: "application/json;charset=UTF-8",
+                    dataType: "json",
+                    success: function (jsonData) { // Callback function when successful
+                        viewLoginMessage(jsonData); // Call VIEW function 
+                    },
+                    fail: function () {
+                        alert("ERROR: Database connection failed.");
+                    },
+                });
+            }            
+        </script>     
+        <script src="js/jquery.tabledit.settingmember.js"></script>    
+    </head>
+    
+    <body data-spy="scroll" data-target="#myNavbar" data-offset="50" onload="showDepartmentList()">
+        <!-- bodyContainer -->
+        <div id="bodyContainer" pageID="" class="container-fluid">
+            <!-- bodyRow -->
+            <div id="bodyRow" class="row">
+                <!-- sidebarColumn -->
+                <div id="sidebarColumn" class="col-md-2 col-sm-3">
+                    <!-- logo -->
+                    <div id="logoBlock" class="row sidebarWrapper">
+                        <a id="logoButton" href="index.html">
+                            <img id="logoImg" class="img-responsive text-center center-block" src="img/logo.jpg">
+                        </a>
+                    </div>
+                    <!-- mainNavBar -->
+                    <div id="mainNavBar" class="row sidebarWrapper">
+                        <nav>
+                            <ul class="navBarBlock">
+                                <a id="examNav" class="navButton" href="index.html">
+                                    <li>診療與病歷</li>
+                                </a>
+                                <a id="treatmentsNav" class="navButton" href="treatment.html">
+                                    <li>治療項目</li>
+                                </a>
+                                <a id="merchandisesNav" class="navButton" href="merchandise.html">
+                                    <li>商品</li>
+                                </a>
+                                <a id="reportsNav" class="navButton" href="report.html">
+                                    <li>報表</li>
+                                </a>
+                            </ul>
+                        </nav>
+                    </div>
+                    <!--sysButtonBar-->
+                    <div id="sysButtonBar" class="row sidebarWrapper">
+                        <nav>
+                            <ul class="navBarBlock">
+                                <li id="settingsNav" class="sysButton">
+                                    <a href="setting-member.html">系統設定</a>
+                                </li>
+                                <li id="logoutNav" class="sysButton">
+                                    <a href="login.html" onclick='return check()'>登出</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>            
+  
+                <!-- contentColumn -->
+                <div id="contentColumn" class="col-md-10 col-sm-9">
+                    <!-- topPart -->
+                    <div id="topPart" class="row">
+                        <div id="searchbarBlock" class="col-md-10 col-sm-9">
+                            <span id="searchIcon" class="searchbarWrapper">
+                                <button id="searchIconImg"></button>
+                            </span>
+                            <span id="searchbar" class="searchbarWrapper search-member-bar">
+                                <input id="searchbarInput" type="text" placeholder="搜尋會員">
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- contentPart -->
+                    <div id="contentPart" class="col-md-12 col-sm-12">
+                        <!-- NavBar for setting different price-->
+                        <div id="mainsettingnavBar" class="row" navbarID="1">
+                            <nav>
+                                <ul class="settingnavBarBlock">
+                                    <a id="memberNav" class="settingnavBarButton" href="setting-member.html">
+                                        <li>會員</li>
+                                    </a>
+                                    <a id="accessNav" class="settingnavBarButton" href="setting-access.html">
+                                        <li>權限</li>
+                                    </a>
+                                    <a id="forgotNav" class="settingnavBarButton" href="setting-forgot.html">
+                                        <li>修改密碼</li>
+                                    </a>
+                                </ul>
+                            </nav>
+                        </div>                      
+                        <div class="" style="">
+                            <button type="button" class="btn btn-md btn-info showAll">
+                                <span class="glyphicon glyphicon-refresh"> 顯示全部</span>
+                            </button>                                  
+                            <button type="button" class="tabledit-add-button btn btn-md btn-primary pull-right canEdit">
+                                <span class="glyphicon glyphicon-plus">Add</span>
+                            </button>                            
+                        </div>  
+                        <div class="" style="margin-top:20px">
+                            <table id="tabledit" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>名字</th>
+                                        <th>分部</th>
+                                        <th>角色</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tablebody"></tbody>
+                            </table>
+                        </div>                     
+                    </div>                                                                                         
+                </div>
+                <!--LIGHTBOX CODES HERE, should be template-->
+                <!--lightBox-->
+                <div id="lightBoxColumn" class="col-md-12 col-sm-12" >
+                    <div id="lightBoxWrapper" class="row">
+                        <div id="memberBoxBlock" class="col-md-10 col-md-push-1">
+
+                            <span id="memberBoxTitle">新增會員資料</span>
+
+                            <div class="form-group row" style="padding-top:24px;">
+                                <label class="col-md-4 col-form-label">會員姓名<span style="color:red">*</span></label>
+                                <div class="col-md-5">
+                                 <input id="new_name" class="form-control" type="text" placeholder="例如: 王小明">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">會員帳號<span style="color:red">*</span></label>
+                                <div class="col-md-5">
+                                 <input id="new_account" class="form-control" type="text" placeholder="例如: account">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">分部<span style="color:red">*</span></label>
+                                <select id="departmentlist" class="col-md-5" style="height: 30px; margin-left: 13.5px;">
+                                    <option value="0" >選擇分部</option>
+                                </select>
+                            </div>        
+
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">角色<span style="color:red">*</span></label>
+                                <select id="rolelist" class="col-md-5" style="height: 30px; margin-left: 13.5px;">
+                                    <option value="0" >選擇角色</option>
+                                </select>
+                            </div>   
+
+                            <button id="add_newMember" type="submit" class="btn btn-primary pull-right">送出</button>                
+                        </div>
+                        <div id="closeButtonBlock">
+                            <button id="lightBoxCloseButton">X</button> <!-- lightBoxCloseButton -->
+                        </div>
+                    </div>
+                </div>                 
+            </div>
+        </div>
+    </body>
+</html>
